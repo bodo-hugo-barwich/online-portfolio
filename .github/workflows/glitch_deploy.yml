@@ -1,0 +1,26 @@
+# This workflow will deploy the project code to the Glitch production environment
+# with Git
+
+name: Push to Glitch
+
+on:
+  workflow_dispatch:
+
+jobs:
+  repo-sync:
+    runs-on: ubuntu-latest
+    steps:        
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - name: Check out the Required Branch
+      uses: actions/checkout@v2
+
+    # Synchronize the Branch with the Glitch Repository
+    - name: repo-sync
+      uses: wei/git-sync@v1
+      env:
+        SOURCE_REPO: "https://github.com/bodo-hugo-barwich/online-portfolio.git"
+        SOURCE_BRANCH: "master"
+        DESTINATION_REPO: ${{ secrets.GLITCH_GIT_URL }}
+        DESTINATION_BRANCH: "master"
+      with:
+        args: $SOURCE_REPO $SOURCE_BRANCH $DESTINATION_REPO $DESTINATION_BRANCH
