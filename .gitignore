@@ -1,3 +1,7 @@
+#project files
+.project
+
+#glitch runtime environment
 node_modules
 web_modules
 .firebase
